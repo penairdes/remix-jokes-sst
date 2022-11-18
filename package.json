@@ -1,26 +1,22 @@
 {
   "name": "remix-jokes-sst",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "scripts": {
-    "start": "sst start",
-    "build": "sst build",
-    "deploy": "sst deploy",
-    "remove": "sst remove",
-    "console": "sst console",
+    "start": "sst2 start",
+    "build": "sst2 build",
+    "deploy": "sst2 deploy",
+    "remove": "sst2 remove",
+    "console": "sst2 console",
     "typecheck": "tsc --noEmit",
-    "test": "sst load-config -- vitest run"
+    "test": "sst2 load-config -- vitest run"
   },
   "devDependencies": {
-    "aws-cdk-lib": "2.39.1",
-    "@serverless-stack/cli": "^1.16.0",
-    "@serverless-stack/resources": "^1.16.0",
-    "typescript": "^4.8.4",
     "@tsconfig/node16": "^1.0.3",
+    "aws-cdk-lib": "2.50.0",
+    "sst": "0.0.0-20221117180451",
+    "typescript": "^4.8.4",
     "vitest": "^0.24.5"
-  },
-  "workspaces": [
-    "services",
-    "web"
-  ]
+  }
 }
