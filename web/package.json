@@ -9,12 +9,15 @@
     "start": "remix-serve build"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.218.0",
     "@remix-run/node": "^1.7.4",
     "@remix-run/react": "^1.7.4",
     "@remix-run/serve": "^1.7.4",
+    "electrodb": "^2.3.3",
     "isbot": "^3.5.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "ulid": "^2.3.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.7.4",
@@ -23,6 +26,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "eslint": "^8.23.1",
+    "prettier": "2.8.0",
     "typescript": "^4.7.4"
   },
   "engines": {

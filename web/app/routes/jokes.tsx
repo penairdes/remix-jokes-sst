@@ -1,5 +1,7 @@
-import type { LinksFunction } from "@remix-run/node";
-import { Outlet, Link } from "@remix-run/react";
+import type { LinksFunction, LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { Outlet, Link, useLoaderData } from "@remix-run/react";
+import { Joke } from "~/dynamo/joke";
 
 import styles from "~/styles/jokes.css";
 
@@ -10,7 +12,21 @@ export const links: LinksFunction = () => [
   },
 ];
 
+type LoaderData = {
+  jokesListItems: Array<{ id: string; name: string }>;
+};
+
+export const loader: LoaderFunction = async () => {
+  const jokes = await Joke.list(["jokeID", "name"]);
+  const data: LoaderData = {
+    jokesListItems: jokes.map((j) => ({ id: j.jokeID, name: j.name })),
+  };
+  return json(data);
+};
+
 export default function JokesRoute() {
+  const data = useLoaderData<LoaderData>();
+
   return (
     <div className="jokes-layout">
       <header className="jokes-header">
@@ -29,9 +45,11 @@ export default function JokesRoute() {
             <Link to=".">Get a random joke</Link>
             <p>Here are a few more jokes to check out:</p>
             <ul>
-              <li>
-                <Link to="some-joke-id">Hippo</Link>
-              </li>
+              {data.jokesListItems.map((joke) => (
+                <li key={joke.id}>
+                  <Link to={joke.id}>{joke.name}</Link>
+                </li>
+              ))}
             </ul>
             <Link to="new" className="button">
               Add your own
